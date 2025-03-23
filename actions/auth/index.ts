@@ -32,7 +32,7 @@ export const onCompleteUserRegistration = async (
   } catch (error: any) {
     return {
       status: 400,
-      message: error.errors[0].longMessage,
+      message: error?.message,
     };
   }
 };

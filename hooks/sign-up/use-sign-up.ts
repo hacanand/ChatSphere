@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { UserRegistrationProps, UserRegistrationSchema } from "@/schema/auth-schema";
 
 export const useSignUpForm = () => {
-  
+ 
   const [loading, setLoading] = useState<boolean>(false);
   const { signUp, isLoaded, setActive } = useSignUp();
   const router = useRouter();
@@ -39,8 +39,8 @@ export const useSignUpForm = () => {
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
 
       onNext((prev) => prev + 1);
-    } catch (error: any) {
-        toast.error(error.errors[0].longMessage)
+    } catch (error: unknown) {
+      toast.error((error as Error)?.message || "Something went wrong!");
     }
   };
 
@@ -66,7 +66,7 @@ export const useSignUpForm = () => {
             signUp.createdUserId,
             values.type
           );
-
+          console.log(registered);
           if (registered?.status == 200 && registered.user) {
             await setActive({
               session: completeSignUp.createdSessionId,
@@ -77,15 +77,11 @@ export const useSignUpForm = () => {
           }
 
           if (registered?.status == 400) {
-            // toast({
-            //   title: "Error",
-            //   description: "Something went wrong!",
-              // });
-              toast.error('Something went wrong!')
+            toast.error("Something went wrong!");
           }
         }
-      } catch (error: any) {
-            toast.error(error.errors[0].longMessage)
+      } catch (error: unknown) {
+        toast.error((error as Error)?.message || "Something went wrong!");
       }
     }
   );
