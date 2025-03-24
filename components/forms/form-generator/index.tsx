@@ -40,7 +40,7 @@ const FormGenerator = ({
         <Label className="flex flex-col gap-2" htmlFor={`input-${label}`}>
           {label && label}
           <Input
-            id={`input-${label}`}
+            id={`input-${name}`}
             type={type}
             placeholder={placeholder}
             form={form}
@@ -62,7 +62,7 @@ const FormGenerator = ({
       return (
         <Label htmlFor={`select-${label}`}>
           {label && label}
-          <select form={form} id={`select-${label}`} {...register(name)}>
+          <select form={form} id={`select-${name}`} {...register(name)}>
             {options?.length &&
               options.map((option) => (
                 <option value={option.value} key={option.id}>
@@ -87,7 +87,7 @@ const FormGenerator = ({
           {label && label}
           <Textarea
             form={form}
-            id={`input-${label}`}
+            id={`input-${name}`}
             placeholder={placeholder}
             {...register(name)}
             rows={lines}

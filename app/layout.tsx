@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {  Plus_Jakarta_Sans} from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { Toaster } from "sonner";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+import { ThemeProvider } from "next-themes";
+ 
+const jakarta = Plus_Jakarta_Sans({
+ 
   subsets: ["latin"],
 });
 
@@ -27,10 +24,16 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={jakarta.className}
         >
           {children}
-          <Toaster/>
+          <Toaster />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem={false}
+            disableTransitionOnChange={false}
+          />
         </body>
       </html>
     </ClerkProvider>
